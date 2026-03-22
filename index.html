@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MAJI SaaS - Water Utility Management | majisaas.co.ke</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --sky: #0ea5e9;
+  --sky-dark: #0284c7;
+  --navy: #1e3a5f;
+  --navy-dark: #0f2040;
+  --ink: #0a0f1a;
+  --ink2: #0d1424;
+  --rule: rgba(255,255,255,0.07);
+  --rule2: rgba(255,255,255,0.04);
+  --s600: #475569;
+  --s500: #64748b;
+  --s400: #94a3b8;
+  --s300: #cbd5e1;
+  --s200: #e2e8f0;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--ink);
+  color: var(--s400);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,15,26,0.92); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--rule);
+  transition: box-shadow .4s;
+}
+.nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+.nav-mark {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: #fff; box-shadow: 0 2px 12px rgba(14,165,233,.25);
+}
+.nav-brand { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
+.nav-brand span { color: var(--sky); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 400; color: var(--s500);
+  text-decoration: none; transition: color .2s; letter-spacing: 0.1px;
+}
+.nav-links a:hover { color: var(--s200); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-signin {
+  font-size: 13px; font-weight: 500; color: var(--s500);
+  background: none; border: none; cursor: pointer; text-decoration: none;
+  transition: color .2s;
+}
+.nav-signin:hover { color: var(--s200); }
+.nav-demo {
+  font-size: 13px; font-weight: 600; color: #fff;
+  background: var(--sky); border: none; border-radius: 6px;
+  padding: 8px 18px; cursor: pointer; text-decoration: none;
+  transition: background .2s; letter-spacing: 0.1px;
+}
+.nav-demo:hover { background: var(--sky-dark); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 160px 64px 120px;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-noise {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 70% 20%, rgba(30,58,95,.6) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 40% at 10% 90%, rgba(14,165,233,.05) 0%, transparent 60%);
+}
+.hero-inner { max-width: 820px; position: relative; z-index: 1; }
+.hero-kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--sky);
+  opacity: 0.7; margin-bottom: 32px;
+}
+.hero h1 {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 800; line-height: 1.0;
+  letter-spacing: -3px; color: #fff;
+  margin-bottom: 32px;
+}
+.hero h1 em { font-style: normal; color: var(--s400); font-weight: 300; }
+.hero-body {
+  font-size: 17px; font-weight: 400; color: var(--s500);
+  max-width: 560px; line-height: 1.8; margin-bottom: 56px;
+}
+.hero-body strong { color: var(--s300); font-weight: 500; }
+.hero-rule { width: 100%; height: 1px; background: var(--rule); margin-bottom: 48px; }
+.hero-metrics {
+  display: flex; gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden;
+  width: fit-content;
+}
+.metric {
+  padding: 20px 32px;
+  border-right: 1px solid var(--rule);
+}
+.metric:last-child { border-right: none; }
+.metric-val {
+  font-size: 28px; font-weight: 800; color: #fff;
+  letter-spacing: -1.5px; line-height: 1;
+}
+.metric-val span { color: var(--sky); }
+.metric-label {
+  font-size: 11px; font-weight: 500; color: var(--s600);
+  margin-top: 5px; line-height: 1.4;
+}
+
+/* ── SHARED ── */
+.section { padding: 120px 64px; border-bottom: 1px solid var(--rule); }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.overline {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--sky); opacity: 0.7;
+  margin-bottom: 24px; display: block;
+}
+.h2 {
+  font-size: clamp(32px, 4vw, 52px); font-weight: 800;
+  color: #fff; letter-spacing: -1.5px; line-height: 1.08;
+  margin-bottom: 20px;
+}
+.h2 em { font-style: normal; color: var(--s500); font-weight: 300; }
+.lead {
+  font-size: 16px; color: var(--s500); line-height: 1.8;
+  max-width: 560px;
+}
+.lead strong { color: var(--s300); font-weight: 500; }
+
+/* ── PROBLEM ── */
+.problem-section { background: var(--ink2); }
+.problem-layout {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; margin-top: 72px;
+  border: 1px solid var(--rule); border-radius: 2px;
+}
+.problem-item {
+  padding: 48px 40px;
+  border-right: 1px solid var(--rule);
+  position: relative;
+}
+.problem-item:last-child { border-right: none; }
+.problem-index {
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  color: var(--s600); text-transform: uppercase;
+  margin-bottom: 28px; display: block;
+}
+.problem-item h3 {
+  font-size: 18px; font-weight: 700; color: #fff;
+  letter-spacing: -0.4px; line-height: 1.3;
+  margin-bottom: 16px;
+}
+.problem-item p {
+  font-size: 14px; color: var(--s500); line-height: 1.75;
+}
+.problem-tag {
+  display: inline-block; margin-top: 24px;
+  font-size: 11px; font-weight: 600;
+  color: rgba(239,68,68,.7);
+  letter-spacing: 0.5px;
+}
+
+/* ── PLATFORM ── */
+.platform-section { background: var(--ink); }
+.platform-intro { margin-bottom: 80px; }
+.apps-layout {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; border: 1px solid var(--rule); border-radius: 2px;
+}
+.app-col {
+  padding: 52px 40px;
+  border-right: 1px solid var(--rule);
+  position: relative;
+}
+.app-col::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.app-col:nth-child(1)::before { background: var(--sky); }
+.app-col:nth-child(2)::before { background: rgba(14,165,233,.45); }
+.app-col:nth-child(3)::before { background: rgba(14,165,233,.2); }
+.app-col:last-child { border-right: none; }
+.app-kicker {
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--sky); opacity: 0.6;
+  margin-bottom: 20px; display: block;
+}
+.app-col h3 {
+  font-size: 19px; font-weight: 700; color: #fff;
+  letter-spacing: -0.3px; line-height: 1.25;
+  margin-bottom: 16px;
+}
+.app-col > p {
+  font-size: 13px; color: var(--s500); line-height: 1.75;
+  margin-bottom: 24px;
+}
+.app-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.app-list li {
+  font-size: 13px; color: var(--s500); line-height: 1.6;
+  padding-left: 16px; position: relative;
+}
+.app-list li::before {
+  content: '';
+  position: absolute; left: 0; top: 8px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(14,165,233,.4);
+}
+.platform-note {
+  margin-top: 48px;
+  font-size: 12px; color: var(--s600);
+  font-style: italic; text-align: center;
+  letter-spacing: 0.1px;
+}
+
+/* ── COMPLIANCE ── */
+.compliance-section { background: var(--ink2); }
+.compliance-body {
+  max-width: 680px;
+  margin-top: 72px;
+}
+.compliance-prose h3 {
+  font-size: 16px; font-weight: 600; color: var(--s200);
+  margin-bottom: 10px; line-height: 1.4;
+}
+.compliance-prose p {
+  font-size: 14px; color: var(--s500); line-height: 1.8;
+  margin-bottom: 40px;
+}
+.compliance-prose p:last-child { margin-bottom: 0; }
+.c-rule { width: 24px; height: 1px; background: rgba(14,165,233,.3); margin-bottom: 28px; }
+/* ── EDITIONS ── */
+.editions-section { background: var(--ink); }
+.editions-intro { margin-bottom: 72px; }
+.editions-intro .lead { margin-top: 16px; }
+.editions-body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 2px;
+  overflow: hidden;
+}
+.edition {
+  background: var(--ink); padding: 56px 48px;
+  position: relative;
+}
+.edition.enterprise { background: var(--ink2); }
+.edition-top-rule {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+}
+.edition.lean .edition-top-rule { background: rgba(14,165,233,.3); }
+.edition.enterprise .edition-top-rule { background: var(--sky); }
+.edition-tier {
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--s600);
+  margin-bottom: 20px; display: block;
+}
+.edition h3 {
+  font-size: 22px; font-weight: 700; color: #fff;
+  letter-spacing: -0.4px; margin-bottom: 18px; line-height: 1.2;
+}
+.edition-desc {
+  font-size: 14px; color: var(--s500); line-height: 1.75;
+  margin-bottom: 40px; padding-bottom: 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.edition-price {
+  font-size: 36px; font-weight: 800; color: #fff;
+  letter-spacing: -1.5px; line-height: 1;
+  margin-bottom: 6px;
+}
+.edition.enterprise .edition-price { font-size: 22px; letter-spacing: -0.5px; }
+.edition-price-sub { font-size: 13px; color: var(--s600); font-weight: 400; }
+
+/* ── CTA ── */
+.cta-section {
+  padding: 140px 64px;
+  background: var(--ink2);
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(14,165,233,.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; max-width: 640px; margin: 0 auto; }
+.cta-overline {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--sky); opacity: 0.7;
+  margin-bottom: 24px; display: block;
+}
+.cta-h2 {
+  font-size: clamp(28px, 3.5vw, 44px); font-weight: 800;
+  color: #fff; letter-spacing: -1.5px; line-height: 1.1;
+  margin-bottom: 16px;
+}
+.cta-sub {
+  font-size: 15px; color: var(--s500); line-height: 1.8;
+  margin-bottom: 48px;
+}
+.cta-form {
+  display: grid; grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 8px; margin-bottom: 20px;
+}
+.cta-input {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 6px; padding: 13px 16px;
+  font-size: 14px; color: #fff;
+  font-family: inherit; outline: none;
+  transition: border-color .2s;
+}
+.cta-input::placeholder { color: var(--s600); }
+.cta-input:focus { border-color: rgba(14,165,233,.5); background: rgba(255,255,255,.06); }
+.cta-btn {
+  font-size: 13px; font-weight: 600; color: #fff;
+  background: var(--sky); border: none; border-radius: 6px;
+  padding: 13px 22px; cursor: pointer; white-space: nowrap;
+  transition: background .2s;
+}
+.cta-btn:hover { background: var(--sky-dark); }
+.cta-note {
+  font-size: 12px; color: var(--s600);
+}
+.cta-note a { color: var(--s500); text-decoration: none; transition: color .2s; }
+.cta-note a:hover { color: var(--s300); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); padding: 64px 64px 40px;
+}
+.footer-inner { max-width: 1080px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 64px; padding-bottom: 48px;
+  border-bottom: 1px solid var(--rule2);
+  margin-bottom: 28px;
+}
+.footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px; }
+.footer-brand-copy { font-size: 13px; color: var(--s600); line-height: 1.7; max-width: 220px; margin-bottom: 20px; }
+.footer-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.footer-badge {
+  font-size: 10px; font-weight: 500; color: var(--s600);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 4px; padding: 3px 9px;
+  letter-spacing: 0.2px;
+}
+.footer-col-head {
+  font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--s600);
+  margin-bottom: 16px; display: block;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: var(--s600);
+  text-decoration: none; margin-bottom: 10px;
+  transition: color .2s;
+}
+.footer-col a:hover { color: var(--s300); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+  font-size: 12px; color: var(--s600);
+}
+.footer-bottom a { color: var(--s600); text-decoration: none; transition: color .2s; }
+.footer-bottom a:hover { color: var(--s400); }
+.kirimon {
+  display: block; text-align: center; margin-top: 24px;
+  font-size: 0.52rem; letter-spacing: 0.22em;
+  opacity: 0.18; color: var(--s400); text-transform: uppercase;
+}
+
+/* ── FADE ANIMATION ── */
+.fade { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+.fade.in { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .cta-form { grid-template-columns: 1fr 1fr; }
+  .cta-btn { grid-column: span 2; }
+}
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 120px 24px 80px; }
+  .section { padding: 80px 24px; }
+  .problem-layout { grid-template-columns: 1fr; }
+  .problem-item { border-right: none; border-bottom: 1px solid var(--rule); }
+  .problem-item:last-child { border-bottom: none; }
+  .apps-layout { grid-template-columns: 1fr; }
+  .app-col { border-right: none; border-bottom: 1px solid var(--rule); }
+  .app-col:last-child { border-bottom: none; }
+  .editions-body { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .cta-section { padding: 80px 24px; }
+  footer { padding: 48px 24px 32px; }
+  .hero-metrics { flex-wrap: wrap; width: 100%; }
+  .metric { flex: 1; min-width: 120px; }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 40px; letter-spacing: -2px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .cta-form { grid-template-columns: 1fr; }
+  .cta-btn { grid-column: auto; }
+  .editions-body { grid-template-columns: 1fr; }
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <div class="nav-mark">م</div>
+    <span class="nav-brand">MAJI <span>SaaS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#compliance">Compliance</a></li>
+    <li><a href="#editions">Editions</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="#cta" class="nav-demo">Request Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-inner">
+    <p class="hero-kicker fade">Water utility management - Kenya</p>
+    <h1 class="fade">
+      Your utility.<br/>
+      <em>Fully accounted for.</em>
+    </h1>
+    <p class="hero-body fade">
+      MAJI SaaS is the only platform built for Kenya's
+      <strong>89+ WASREB-licensed Water Service Providers</strong> -
+      with compliant billing, M-Pesa, and field operations that work
+      the way Kenya actually works.
+    </p>
+    <div class="hero-rule fade"></div>
+    <div class="hero-metrics fade">
+      <div class="metric">
+        <div class="metric-val">89<span>+</span></div>
+        <div class="metric-label">WASREB-licensed<br/>WSPs in Kenya</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">14</div>
+        <div class="metric-label">WASREB billing rules<br/>hard-coded</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">100<span>K</span></div>
+        <div class="metric-label">Accounts per<br/>billing cycle</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val"><span>&lt;</span>30<span>m</span></div>
+        <div class="metric-label">Full billing<br/>cycle runtime</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- PROBLEM -->
+<section class="section problem-section" id="problem">
+  <div class="section-inner">
+    <div class="fade">
+      <span class="overline">The problem</span>
+      <h2 class="h2">Kenya's water utilities are running<br/>on tools that were <em>never built for them.</em></h2>
+    </div>
+    <div class="problem-layout fade">
+      <div class="problem-item">
+        <span class="problem-index">01</span>
+        <h3>Your billing is only as good as the last spreadsheet.</h3>
+        <p>IBT tariff calculations done manually. Errors surface at audit - after bills have gone out. No audit trail. No immutable record. Revenue leaks quietly until someone notices.</p>
+        <span class="problem-tag">Revenue leakage</span>
+      </div>
+      <div class="problem-item">
+        <span class="problem-index">02</span>
+        <h3>WASREB reports shouldn't take three weeks.</h3>
+        <p>Eight mandatory sections. Six disconnected data sources. Manual assembly. MDs signing off on reports they cannot fully verify. Submissions late, incomplete, or both.</p>
+        <span class="problem-tag">Regulatory exposure</span>
+      </div>
+      <div class="problem-item">
+        <span class="problem-index">03</span>
+        <h3>You don't know what's happening in the field until it's too late.</h3>
+        <p>Paper route sheets. Manual transcription. Anomalies caught by the time a customer complaint arrives. No GPS evidence. No photo record. No field audit trail.</p>
+        <span class="problem-tag">NRW and dispute risk</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM -->
+<section class="section platform-section" id="platform">
+  <div class="section-inner">
+    <div class="platform-intro fade">
+      <span class="overline">The platform</span>
+      <h2 class="h2">One system.<br/><em>Three integrated applications.</em></h2>
+      <p class="lead" style="margin-top:20px">Every person in your utility's ecosystem - from the MD to the meter reader in the field to the customer on their phone - operating from the <strong>same verified, real-time data</strong>. Nothing duplicated. Nothing reconciled by hand. Nothing lost.</p>
+    </div>
+    <div class="apps-layout fade">
+      <div class="app-col">
+        <span class="app-kicker">For the utility</span>
+        <h3>MAJI SaaS - the management platform.</h3>
+        <p>The operational backbone of your utility. Every role, one system. Data that does not need to be extracted before it can be used.</p>
+        <ul class="app-list">
+          <li>MD executive dashboard - live KPIs, approval queue, WASREB benchmarks</li>
+          <li>WASREB-compliant IBT billing engine with full anomaly review workflow</li>
+          <li>M-Pesa Daraja 2.0 native - STK Push, Paybill, bank integrations</li>
+          <li>Automated WASREB quarterly report - MD signs, not assembles</li>
+          <li>Complaints management with WASREB 5-day SLA enforcement</li>
+          <li>WSP credit intelligence - verified operational data structured for commercial finance</li>
+        </ul>
+      </div>
+      <div class="app-col">
+        <span class="app-kicker">For the field</span>
+        <h3>The meter reading app - offline first.</h3>
+        <p>Kenya's field conditions are real. The app works without connectivity. Everything captured in the field feeds directly into the billing engine the moment it syncs.</p>
+        <ul class="app-list">
+          <li>Full offline operation - readings, GPS coordinates, and photo evidence captured with no signal</li>
+          <li>Automated anomaly detection flags unusual readings before the billing cycle opens</li>
+          <li>Encrypted local storage - data is secure even on a lost device</li>
+          <li>Syncs to the platform the moment connectivity is restored - no manual upload</li>
+        </ul>
+      </div>
+      <div class="app-col">
+        <span class="app-kicker">For the customer</span>
+        <h3>MyMaji - the customer app.</h3>
+        <p>Your customers get a branded, self-service experience on their smartphones. Fewer calls to your office. Faster collection. Every interaction logged against their account.</p>
+        <ul class="app-list">
+          <li>Live account balance, bill history, and consumption trends - always current</li>
+          <li>M-Pesa payments in two taps - STK Push initiated directly from the app</li>
+          <li>Complaint lodgement with reference number and SLA status tracking</li>
+          <li>Available in English and Swahili - works on any Android smartphone</li>
+        </ul>
+      </div>
+    </div>
+    <p class="platform-note fade">The full platform - every screen, every workflow - is shown during the demo.</p>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section class="section compliance-section" id="compliance">
+  <div class="section-inner">
+    <div class="fade">
+      <span class="overline">Built for this sector</span>
+      <h2 class="h2">The regulatory weight<br/><em>lifts from your desk.</em></h2>
+    </div>
+    <div class="compliance-body fade">
+      <div class="compliance-prose">
+        <div class="c-rule"></div>
+        <h3>Compliance is not a task you run before an audit.</h3>
+        <p>In MAJI SaaS, compliant outcomes are the only possible outcomes. The billing engine cannot produce a non-compliant bill. The WASREB quarterly report assembles itself. The audit trail exists without anyone maintaining it. These are not features. They are the architecture.</p>
+        <div class="c-rule"></div>
+        <h3>Your MD's time is for decisions, not documentation.</h3>
+        <p>The WASREB report arrives on the MD's desk complete, verified, and ready to sign - not as a collection task. Every approval, payment, and operational action is already recorded. When WASREB asks, the answer is already there.</p>
+        <div class="c-rule"></div>
+        <h3>And when the commercial finance conversation comes.</h3>
+        <p>MAJI SaaS builds a verified, structured credit profile from your operational data - governance, financial performance, operations, and climate readiness. The data you need for that conversation is already in the platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITIONS -->
+<section class="section editions-section" id="editions">
+  <div class="section-inner">
+    <div class="editions-intro fade">
+      <span class="overline">Two editions</span>
+      <h2 class="h2">Right-sized for <em>every WSP.</em></h2>
+      <p class="lead" style="margin-top:20px">From a 5,000-account emerging WSP to a 100,000-account city utility. Priced per account - scales with your mandate, not against it.</p>
+    </div>
+    <div class="editions-body fade">
+      <div class="edition lean">
+        <div class="edition-top-rule"></div>
+        <span class="edition-tier">Lean Edition</span>
+        <h3>For WSPs building the foundation.</h3>
+        <p class="edition-desc">IBT billing, M-Pesa payments, offline meter reading app, MyMaji customer app, and complaints management. Everything required to run clean, WASREB-compliant operations from day one.</p>
+        <div class="edition-price">KES 4.99</div>
+        <p class="edition-price-sub">per account - per month</p>
+      </div>
+      <div class="edition enterprise">
+        <div class="edition-top-rule"></div>
+        <span class="edition-tier">Enterprise Edition</span>
+        <h3>For utilities with institutional ambitions.</h3>
+        <p class="edition-desc">Everything in Lean, plus the WASREB report engine, bank integrations, USSD channel, advanced analytics, NRW tracking, WSP credit intelligence, and climate finance readiness. Built for utilities that need to demonstrate performance - to their board, their regulator, and their funders.</p>
+        <div class="edition-price">Priced per account</div>
+        <p class="edition-price-sub">Scaled to your utility - scoped at demo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner">
+    <span class="cta-overline fade">Get started</span>
+    <h2 class="cta-h2 fade">Ready to run your first WASREB-compliant<br/>billing cycle on MAJI SaaS?</h2>
+    <p class="cta-sub fade">Request a demo. We will show you a live billing cycle, walk through the three applications, and scope your migration. No obligation.</p>
+    <form class="cta-form fade" onsubmit="return handleDemo(event)">
+      <input class="cta-input" type="text" placeholder="Your name" required />
+      <input class="cta-input" type="email" placeholder="Work email" required />
+      <input class="cta-input" type="text" placeholder="WSP / Organisation" required />
+      <button class="cta-btn" type="submit">Request a Demo</button>
+    </form>
+    <p class="cta-note fade">Or reach us at <a href="mailto:enterprise@majisaas.co.ke">enterprise@majisaas.co.ke</a> &nbsp;·&nbsp; Response within 1 business day.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a class="footer-logo" href="#">
+          <div class="nav-mark">م</div>
+          <span class="nav-brand">MAJI <span>SaaS</span></span>
+        </a>
+        <p class="footer-brand-copy">Kenya's first purpose-built, WASREB-aware water utility management platform. East Africa scale from Year 3.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">Kenya DPA 2019</span>
+          <span class="footer-badge">WASREB-aware</span>
+          <span class="footer-badge">AES-256</span>
+          <span class="footer-badge">Aligned with WASPA sector frameworks</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-head">Platform</span>
+        <a href="#platform">MAJI SaaS Management Platform</a>
+        <a href="#platform">Meter Reading App</a>
+        <a href="#platform">MyMaji Customer App</a>
+        <a href="#compliance">WASREB Compliance</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-head">Company</span>
+        <a href="#">About MAJI SaaS</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-head">Legal &amp; Support</span>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Data Processing Agreement</a>
+        <a href="#">Security</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MAJI SaaS. All rights reserved. Nairobi, Kenya. <a href="https://majisaas.co.ke">majisaas.co.ke</a></span>
+      <span>Water Utility Management &nbsp;·&nbsp; Built for WASREB-licensed WSPs &nbsp;·&nbsp; Kenya DPA 2019 Compliant</span>
+    </div>
+    <span class="kirimon">A Kirimon Impact Ventures Company</span>
+  </div>
+</footer>
+
+<script>
+function handleDemo(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.cta-btn');
+  btn.textContent = 'Request received';
+  btn.style.background = '#16a34a';
+  btn.disabled = true;
+  return false;
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.boxShadow =
+    window.scrollY > 10 ? '0 1px 40px rgba(0,0,0,.6)' : 'none';
+}, { passive: true });
+</script>
+</body>
+</html>
